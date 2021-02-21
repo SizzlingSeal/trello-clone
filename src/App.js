@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import MainContainer from "./components/MainContainer";
+import ModalContextProvider from "./contexts/ModalContext";
+import ProjectContextProvider from "./contexts/ProjectContext";
+import TimeContextProvider from "./contexts/Time";
+import DataContextProvider from './contexts/DataContext';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DataContextProvider>
+      <ModalContextProvider>
+      <ProjectContextProvider>
+      <TimeContextProvider>
+      <Header/>
+      <MainContainer/>
+      </TimeContextProvider>
+      </ProjectContextProvider>
+      </ModalContextProvider>
+      </DataContextProvider>
     </div>
   );
 }
