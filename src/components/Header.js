@@ -38,9 +38,9 @@ const Header = () => {
               : <option>Create new project</option> }
             </select>
             <i className='bx bx-book-add bx-tada-hover' id="add" 
-            onClick={handleModal('addmodal')}></i>
+            onClick={handleModal('addmodal')} title="Add Project"></i>
             <div className="search">
-            <i className='bx bx-search-alt-2' id="searchlogo"></i>
+            <i className='bx bx-search-alt-2' id="searchlogo" ></i>
             <input type="text" placeholder="Search"/>
             </div>
             </div>
@@ -49,9 +49,9 @@ const Header = () => {
             </div>
             <div className="information">
             <i className='bx bxs-wrench' id="settings"
-            onClick={handleModal('settingsmodal')}></i>
+            onClick={handleModal('settingsmodal')} title="Settings"></i>
             <i className='bx bxs-help-circle' id="help"
-            onClick={handleModal('helpmodal')}></i>
+            onClick={handleModal('helpmodal')} title="Help"></i>
             <a>{time}</a>
             </div>
             <AddProjectModal isOpen={modals[0].display} onRequestClose={handleModal('addmodal')} handleAdd={handleAdd}/>

@@ -11,6 +11,7 @@ export const dataReducer = (state, action) => {
             tasks:[]
            }}, projectList:[...state.projectList, [action.name]],
             displayedProject: action.name}
+            
 
         case 'ADD_TASK':
             console.log(action.project);
@@ -28,11 +29,14 @@ export const dataReducer = (state, action) => {
                     }},
                     columnOrder:[...state.columnOrder, setTaskId]
                     } 
+                    
         case 'CHANGE_SELECTED_TASK':
             return{...state, selectedTask: action.ids}
+            
+
         case 'ADD_TODO':
             const setTodoId = uuidv4();
-            console.log(state);
+            alert(action.desc)
                     return {...state, columns:{...state.columns,
                     [action.columnname] :{
                         ...state.columns[action.columnname],
@@ -43,10 +47,42 @@ export const dataReducer = (state, action) => {
                         name: action.name,
                         desc: action.desc
                     }}}
+            
    
         case 'CHANGE_PROJECT':
         return{...state, columnOrder:[...state.projects[action.selected].tasks],
         displayedProject:action.selected}
+
+        case 'CHANGE_ORDER_TODO_SAME':
+            return {...state, columns:{...state.columns, [action.newColumn.id]: action.newColumn}}
+        
+        case 'CHANGE_ORDER_TODO':
+            return{...state, 
+                columns: {...state.columns, 
+                [action.newStart.id]: action.newStart, 
+                [action.newFinish.id]: action.newFinish,
+            }}
+        case 'REMOVE_TODO':
+            return{
+                ...state,
+                columns: {
+                    ...state.columns,
+                    [action.columnid]: {
+                        ...state.columns[action.columnid],
+                        todoIds:action.newColumn,
+                    },
+                },
+                todos:action.newTodos
+            }
+            
+
+            
+     
+              
+              
+          
+
+
 
     }
 }

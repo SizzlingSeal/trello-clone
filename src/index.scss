@@ -36,9 +36,9 @@ header {
       border: 1px solid $secondary-color;
     }
     #add {
+      cursor: pointer;
       text-align: center;
       font-size: 1.5em;
-      cursor: pointer;
     }
 
     .search {
@@ -69,6 +69,7 @@ header {
     margin: auto;
     text-align: center;
     a {
+      user-select: none;
       font-family: "Arvo", serif;
       font-size: 1.6rem;
     }
@@ -78,12 +79,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
 
     #help,
     #settings {
+      cursor: pointer;
       text-align: center;
       font-size: 1.5em;
-      cursor: pointer;
       margin: auto 10px;
     }
   }
@@ -241,13 +243,13 @@ header {
     height: fit-content;
 
     .dragicon {
+      cursor: grab;
       background: orange;
       width: 20px;
       height: 20px;
     }
   }
-  i {
-    cursor: pointer;
+  #add {
     height: fit-content;
   }
 
@@ -279,7 +281,9 @@ header {
       div {
         border: 1px solid black;
       }
-      i {
+      #checktask,
+      #deletetask {
+        cursor: pointer;
         font-size: 1.4rem;
       }
     }
