@@ -9,7 +9,7 @@ export const dataReducer = (state, action) => {
             title:action.name,
             desc:action.desc,
             tasks:[]
-           }}, projectList:[...state.projectList, [action.name]],
+           }}, projectList:[...state.projectList, action.name],
             displayedProject: action.name}
             
 
@@ -36,7 +36,6 @@ export const dataReducer = (state, action) => {
 
         case 'ADD_TODO':
             const setTodoId = uuidv4();
-            alert(action.desc)
                     return {...state, columns:{...state.columns,
                     [action.columnname] :{
                         ...state.columns[action.columnname],
@@ -73,6 +72,17 @@ export const dataReducer = (state, action) => {
                     },
                 },
                 todos:action.newTodos
+            }
+
+        case 'REMOVE_TASK':
+            
+            return{
+                ...state,
+                projects: {...state.projects, [action.project] : {...state.projects[action.project], tasks: action.newTasks}},
+                columns: action.newColumn,
+                todos: action.newTodos,
+                columnOrder: action.newColumnOrder,
+                
             }
             
 

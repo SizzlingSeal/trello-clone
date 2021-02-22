@@ -11,7 +11,7 @@ const DataContextProvider = (props) =>{
         columnOrder:[],
         projectList:[],
         displayedProject: '',
-        selectedTask: 'heyasgsgagasgas',
+        selectedTask: '',
     });
 
     return(

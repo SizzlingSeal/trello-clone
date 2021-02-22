@@ -41,27 +41,20 @@ header {
       font-size: 1.5em;
     }
 
-    .search {
-      margin-left: 1%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #trashproject {
+      cursor: pointer;
+      text-align: center;
+      font-size: 1.5em;
+      height: fit-content;
+    }
+    input {
       height: 100%;
-      border: 1px solid $secondary-color;
-      #searchlogo {
-        text-align: center;
-        font-size: 1.5em;
-        height: fit-content;
-      }
-      input {
-        height: 100%;
-        border: none;
-        background: transparent;
-        outline: none;
-      }
-      ::placeholder {
-        color: $font-color;
-      }
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+    ::placeholder {
+      color: $font-color;
     }
   }
 

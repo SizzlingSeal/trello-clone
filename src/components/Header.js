@@ -6,8 +6,6 @@ import SettingsModal from './modals/SettingsModal';
 import {ModalContext} from '../contexts/ModalContext';
 import {DataContext} from '../contexts/DataContext';
 
-
-
 const Header = () => {
     const {time} = useContext(Time);
     const {modals,dispatch} = useContext(ModalContext);
@@ -28,6 +26,14 @@ const Header = () => {
         setSelected(selected);     
         itemDispatch({type:'CHANGE_PROJECT', selected});
     }
+    function handleDeleteProject(){
+       const project =  document.getElementById("projects").value.toString();
+       console.log(project);
+       const newProjectList = items.projectList.filter(e => e !== project);
+       console.log(newProjectList);
+       
+       
+    }
 
     return ( 
         <header>
@@ -39,10 +45,7 @@ const Header = () => {
             </select>
             <i className='bx bx-book-add bx-tada-hover' id="add" 
             onClick={handleModal('addmodal')} title="Add Project"></i>
-            <div className="search">
-            <i className='bx bx-search-alt-2' id="searchlogo" ></i>
-            <input type="text" placeholder="Search"/>
-            </div>
+            {Object.keys(items.projects).length !== 0 &&  <i className='bx bx-trash-alt bx-tada-hover' id="trashproject" onClick={() => handleDeleteProject()}></i>}
             </div>
             <div className="title">
             <a>Project To Note</a>

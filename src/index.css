@@ -47,22 +47,8 @@ header .organizer #add {
   font-size: 1.5em;
 }
 
-header .organizer .search {
-  margin-left: 1%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100%;
-  border: 1px solid #00171f;
-}
-
-header .organizer .search #searchlogo {
+header .organizer #trashproject {
+  cursor: pointer;
   text-align: center;
   font-size: 1.5em;
   height: -webkit-fit-content;
@@ -70,26 +56,26 @@ header .organizer .search #searchlogo {
   height: fit-content;
 }
 
-header .organizer .search input {
+header .organizer input {
   height: 100%;
   border: none;
   background: transparent;
   outline: none;
 }
 
-header .organizer .search ::-webkit-input-placeholder {
+header .organizer ::-webkit-input-placeholder {
   color: #e4e3d3;
 }
 
-header .organizer .search :-ms-input-placeholder {
+header .organizer :-ms-input-placeholder {
   color: #e4e3d3;
 }
 
-header .organizer .search ::-ms-input-placeholder {
+header .organizer ::-ms-input-placeholder {
   color: #e4e3d3;
 }
 
-header .organizer .search ::placeholder {
+header .organizer ::placeholder {
   color: #e4e3d3;
 }
 
