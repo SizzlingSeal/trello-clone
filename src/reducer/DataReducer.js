@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-
 export const dataReducer = (state, action) => {
     switch(action.type){
         case 'ADD_PROJECT':
@@ -12,7 +11,6 @@ export const dataReducer = (state, action) => {
            }}, projectList:[...state.projectList, action.name],
             displayedProject: action.name}
             
-
         case 'ADD_TASK':
             console.log(action.project);
            const project = action.project;
@@ -29,11 +27,6 @@ export const dataReducer = (state, action) => {
                     }},
                     columnOrder:[...state.columnOrder, setTaskId]
                     } 
-                    
-        case 'CHANGE_SELECTED_TASK':
-            return{...state, selectedTask: action.ids}
-            
-
         case 'ADD_TODO':
             const setTodoId = uuidv4();
                     return {...state, columns:{...state.columns,
@@ -45,9 +38,10 @@ export const dataReducer = (state, action) => {
                         id: setTodoId,
                         name: action.name,
                         desc: action.desc
-                    }}}
+                    }}}            
+        case 'CHANGE_SELECTED_TASK':
+            return{...state, selectedTask: action.ids}
             
-   
         case 'CHANGE_PROJECT':
         return{...state, columnOrder:[...state.projects[action.selected].tasks],
         displayedProject:action.selected}
@@ -61,6 +55,7 @@ export const dataReducer = (state, action) => {
                 [action.newStart.id]: action.newStart, 
                 [action.newFinish.id]: action.newFinish,
             }}
+
         case 'REMOVE_TODO':
             return{
                 ...state,
@@ -75,24 +70,23 @@ export const dataReducer = (state, action) => {
             }
 
         case 'REMOVE_TASK':
-            
             return{
                 ...state,
                 projects: {...state.projects, [action.project] : {...state.projects[action.project], tasks: action.newTasks}},
                 columns: action.newColumn,
                 todos: action.newTodos,
                 columnOrder: action.newColumnOrder,
-                
             }
-            
+        case 'REMOVE_PROJECT':
+            return {
+                ...state,
+                projects: action.newProjects,
+                columns: action.newColumns,
+                todos: action.newTodos,
+                columnOrder:[],
+                projectList: action.newProjectList,
 
-            
-     
-              
-              
-          
-
-
+            }
 
     }
 }

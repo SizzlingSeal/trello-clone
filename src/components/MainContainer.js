@@ -41,7 +41,6 @@ const MainContainer = () => {
                 todoIds: newTaskIds,
             };
 
-            
             itemDispatch({type:'CHANGE_ORDER_TODO_SAME', newColumn});
             return;
             
@@ -65,6 +64,11 @@ const MainContainer = () => {
         itemDispatch({type:'CHANGE_ORDER_TODO', newStart, newFinish});
 
     }
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          document.getElementById("addnewtask").click();
+        }
+      }
 
     return ( 
         <DragDropContext onDragEnd={onDragEnd}>
@@ -77,8 +81,8 @@ const MainContainer = () => {
              })}
             {Object.keys(items.projects).length !== 0 && 
             <div className="addtask"> 
-            <input type="text" onChange={handleChange} value={name} placeholder="Enter Task Name"/>
-            <button onClick={() => handleAddTask(name, items.displayedProject)}>Add new Task</button>
+            <input type="text" onChange={handleChange} value={name} onKeyPress={handleKeyPress} placeholder="Enter Task Name"/>
+            <button onClick={() => handleAddTask(name, items.displayedProject)} id="addnewtask">Add new Task</button>
              </div>}
         </div>
         </DragDropContext>

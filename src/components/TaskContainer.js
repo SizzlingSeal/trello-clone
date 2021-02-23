@@ -4,11 +4,8 @@ import AddTodoModal from './modals/AddTodoModal';
 import {ModalContext} from '../contexts/ModalContext';
 import {DataContext} from '../contexts/DataContext';
 import {Droppable} from 'react-beautiful-dnd';
-import { dataReducer } from '../reducer/DataReducer';
-
 
 const TaskContainer = (props) => {
-    
     const {modals,dispatch} = useContext(ModalContext);
     const {items, itemDispatch} = useContext(DataContext);
     const [id, setId] = useState('');
@@ -32,7 +29,6 @@ const TaskContainer = (props) => {
 
     function handleRemoveTask(){
         const colId = id;
-        alert(id);
         const project = document.getElementById('projects').value.toString();
         let  newColumn = Object.keys(items.columns)
         .filter(key => key !== colId)
@@ -42,7 +38,6 @@ const TaskContainer = (props) => {
         }, {});
         let newColumnOrder = items.columnOrder.filter(order => order !== colId);
         let newTasks = items.projects[project].tasks.filter(task => task !== colId);
-        
         const itemCopy = items;
         const {todoIds} =itemCopy.columns[id];
           if(todoIds.length > 0){
@@ -52,9 +47,7 @@ const TaskContainer = (props) => {
          };
          delete itemCopy.columns[id]
         let newTodos = itemCopy.todos;
-   
         itemDispatch({type:'REMOVE_TASK', newColumn, newColumnOrder, project, newTasks, newTodos});
-
     }
     function handlePressDown(){
         setId(props.columnname.id);
@@ -79,7 +72,6 @@ const TaskContainer = (props) => {
                      {...provided.droppableProps}
                      isDraggingOver={snapshot.isDraggingOver}
                      >
-
                     {props.task.map((task,index) => (
                         <TodoItem key={task.id} task={task} index={index} columnname={props.columnname}/>
                     ))}

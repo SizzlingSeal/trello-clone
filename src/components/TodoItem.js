@@ -9,8 +9,6 @@ const TodoItem = (props) => {
     const [id, setId] = useState(props.columnname.id);
 
    console.log(props.task.id)
-    
-    
     function handleRemove(todoId){
     let  newTodos = Object.keys(items.todos)
     .filter(key => key !== todoId)
