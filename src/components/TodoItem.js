@@ -30,7 +30,7 @@ const TodoItem = (props) => {
                 ref={provided.innerRef}
                 isDragging={snapshot.isDragging}
                 >
-                <div className="dragicon" {...provided.dragHandleProps}></div>
+                <i className='bx bx-grid-vertical' id="dragicon" title="Drag" {...provided.dragHandleProps}></i>
                 <div>
                 <h4>{props.task.name}</h4>
                 </div>

@@ -51,7 +51,6 @@ const TaskContainer = (props) => {
     }
     function handlePressDown(){
         setId(props.columnname.id);
-        console.log(id)
     }
 
     return ( 
