@@ -11,6 +11,10 @@ const Header = () => {
     const {modals,dispatch} = useContext(ModalContext);
     const {items, itemDispatch} = useContext(DataContext);
     const [selected, setSelected] = useState('');
+    document.getElementById('base').setAttribute('data-theme', items.theme);
+    
+    
+
     function handleModal(modal){
         return  () => dispatch({type: 'SHOW_MODAL', id:modal})
         
@@ -62,14 +66,14 @@ const Header = () => {
        
     }
     function toggleTheme(){
-        var toggle = document.getElementById('switch')
-        if(toggle.checked === true){
-            document.getElementById("base").setAttribute('data-theme', 'dark');
-        }else{
-            document.getElementById("base").setAttribute('data-theme', 'light');
-        }
-    
+     if(document.getElementById('switch').checked === true){
+        itemDispatch({type:'CHANGE_THEME', theme:'dark'});
+     }else{
+        itemDispatch({type:'CHANGE_THEME', theme:'light'});
+     }
+        
     }
+    
     return ( 
         <header>
             <div className="organizer">
@@ -86,7 +90,7 @@ const Header = () => {
             <a>Project To Note</a>
             </div>
             <div className="information">
-            <input type="checkbox" id="switch" onChange={toggleTheme}/><label for="switch">Toggle</label>
+            <input type="checkbox" id="switch" onChange={toggleTheme} checked={items.theme === 'dark' ? true : false} /><label for="switch">Toggle</label>
             <i className='bx bxs-help-circle' id="help"
             onClick={handleModal('helpmodal')} title="Help"></i>
             <a>{time}</a>

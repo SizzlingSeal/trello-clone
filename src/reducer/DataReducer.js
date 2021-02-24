@@ -88,5 +88,11 @@ export const dataReducer = (state, action) => {
 
             }
 
+        case 'CHANGE_THEME':
+            return{
+                ...state,
+                theme: action.theme
+            }
+
     }
 }
