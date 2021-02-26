@@ -12,7 +12,6 @@ export const dataReducer = (state, action) => {
             displayedProject: action.name}
             
         case 'ADD_TASK':
-            console.log(action.project);
            const project = action.project;
            const setTaskId = uuidv4();
             return {...state, 
@@ -57,7 +56,8 @@ export const dataReducer = (state, action) => {
             }}
 
         case 'CHANGE_ORDER_TASK':
-            return {...state, columnOrder: action.newColumnOrder}
+            return {...state,  projects:{...state.projects, [state.displayedProject]: {...state.projects[state.displayedProject], tasks: action.newColumnOrder}},
+             columnOrder: action.newColumnOrder}
 
         case 'REMOVE_TODO':
             return{
