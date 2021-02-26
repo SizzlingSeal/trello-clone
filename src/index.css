@@ -266,26 +266,26 @@ header .information #settings {
   right: 40px;
   bottom: 40px;
   margin: auto;
-  background: #2274a5;
+  background: var(--headercolor);
   color: #e4e3d3;
   padding: 20px;
   outline: none;
-  border: 5px solid #00171f;
+  border: 5px solid var(--secondary-color);
 }
 
 .addprojectmodal textarea {
   resize: none;
-  background: transparent;
-  border: 1px solid #00171f;
+  background: var(--container);
+  border: 2px solid var(--secondary-color);
   outline: none;
   maxlength: 20;
 }
 
 .addprojectmodal button {
   margin-top: 10px;
-  background: transparent;
+  background: var(--container);
+  border: 2px solid var(--secondary-color);
   width: 100%;
-  border: 1px solid #00171f;
   outline: none;
   cursor: pointer;
   margin-left: auto;
@@ -305,8 +305,8 @@ header .information #settings {
 }
 
 .addprojectmodal input {
-  background: transparent;
-  border: 1px solid #00171f;
+  background: var(--container);
+  border: 1px solid var(--secondary-color);
   outline: none;
 }
 
@@ -328,11 +328,11 @@ header .information #settings {
   right: 40px;
   bottom: 40px;
   margin: auto;
-  background: #2274a5;
-  color: #e4e3d3;
+  background: var(--headercolor);
+  color: var(--font-color);
   padding: 20px;
   outline: none;
-  border: 5px solid #00171f;
+  border: 5px solid var(--secondary-color);
 }
 
 .addtaskmodal div {
@@ -345,24 +345,29 @@ header .information #settings {
 
 .addtaskmodal textarea {
   resize: none;
-  background: transparent;
-  border: 1px solid #00171f;
+  background: var(--container);
+  border: 1px solid var(--secondary-color);
   outline: none;
 }
 
 .addtaskmodal input {
-  background: transparent;
-  border: 1px solid #00171f;
+  background: var(--container);
+  border: 1px solid var(--secondary-color);
   outline: none;
 }
 
 .addtaskmodal button {
-  background: transparent;
-  border: 1px solid #00171f;
+  background: var(--container);
+  border: 2px solid var(--secondary-color);
   font-size: 1.5rem;
   outline: none;
   width: 100%;
   cursor: pointer;
+}
+
+.addtaskmodal button:hover {
+  background: var(--icon-hover);
+  color: white;
 }
 
 .task-container {

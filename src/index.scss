@@ -199,23 +199,23 @@ header {
   right: 40px;
   bottom: 40px;
   margin: auto;
-  background: $base-color;
+  background: var(--headercolor);
   color: $font-color;
   padding: 20px;
   outline: none;
-  border: 5px solid $secondary-color;
+  border: 5px solid var(--secondary-color);
   textarea {
     resize: none;
-    background: transparent;
-    border: 1px solid $secondary-color;
+    background: var(--container);
+    border: 2px solid var(--secondary-color);
     outline: none;
     maxlength: 20;
   }
   button {
     margin-top: 10px;
-    background: transparent;
+    background: var(--container);
+    border: 2px solid var(--secondary-color);
     width: 100%;
-    border: 1px solid $secondary-color;
     outline: none;
     cursor: pointer;
     margin-left: auto;
@@ -230,8 +230,8 @@ header {
     margin-bottom: 10px;
   }
   input {
-    background: transparent;
-    border: 1px solid $secondary-color;
+    background: var(--container);
+    border: 1px solid var(--secondary-color);
     outline: none;
   }
 }
@@ -247,11 +247,11 @@ header {
   right: 40px;
   bottom: 40px;
   margin: auto;
-  background: $base-color;
-  color: $font-color;
+  background: var(--headercolor);
+  color: var(--font-color);
   padding: 20px;
   outline: none;
-  border: 5px solid $secondary-color;
+  border: 5px solid var(--secondary-color);
   div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -259,23 +259,27 @@ header {
   }
   textarea {
     resize: none;
-    background: transparent;
-    border: 1px solid $secondary-color;
+    background: var(--container);
+    border: 1px solid var(--secondary-color);
     outline: none;
   }
   input {
-    background: transparent;
-    border: 1px solid $secondary-color;
+    background: var(--container);
+    border: 1px solid var(--secondary-color);
     outline: none;
   }
 
   button {
-    background: transparent;
-    border: 1px solid $secondary-color;
+    background: var(--container);
+    border: 2px solid var(--secondary-color);
     font-size: 1.5rem;
     outline: none;
     width: 100%;
     cursor: pointer;
+  }
+  button:hover {
+    background: var(--icon-hover);
+    color: white;
   }
 }
 

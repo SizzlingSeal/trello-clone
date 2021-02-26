@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {DataContext} from '../contexts/DataContext';
 import TaskContainer from './TaskContainer';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 
 const MainContainer = () => {
@@ -21,13 +21,22 @@ const MainContainer = () => {
     }
 
     const onDragEnd = result => {
-        const{destination, source, draggableId} = result;
+        const{destination, source, draggableId, type} = result;
         if(!destination){
             return;
         }
         if(destination.droppableId === source.droppableId && 
-            destination.index === source.index){ alert("nani");
+            destination.index === source.index){ 
                 return;
+        }
+
+        if(type === 'column'){
+            const newColumnOrder = Array.from(items.columnOrder);
+            newColumnOrder.splice(source.index, 1);
+            newColumnOrder.splice(destination.index, 0 , draggableId);
+            itemDispatch({type:'CHANGE_ORDER_TASK', newColumnOrder});
+            return;
+            
         }
         const start = items.columns[source.droppableId];
         const finish = items.columns[destination.droppableId];
@@ -72,19 +81,31 @@ const MainContainer = () => {
 
     return ( 
         <DragDropContext onDragEnd={onDragEnd}>
-        <div className="main-container" >
-            {items.columnOrder.map(columnId => {   
+            <Droppable 
+            droppableId="all-column"
+            direction="horizontal" 
+            type="column">
+                {provided => (
+
+                
+        <div className="main-container" 
+        {...provided.droppableProps}
+        ref={provided.innerRef}>
+            {items.columnOrder.map((columnId, index) => {   
                  const column = items.columns[columnId];
                  const task = column.todoIds.map(todoid => items.todos[todoid]);
                 
-                 return <TaskContainer task={task} columnname={column} />
+                 return <TaskContainer task={task} columnname={column} index={index}/>
              })}
             {Object.keys(items.projects).length !== 0 && 
             <div className="addtask"> 
             <input type="text" onChange={handleChange} value={name} onKeyPress={handleKeyPress} placeholder="Enter Task Name"/>
             <button onClick={() => handleAddTask(name, items.displayedProject)} id="addnewtask">Add new Task</button>
              </div>}
+             {provided.placeholder}
         </div>
+        )}
+        </Droppable>
         </DragDropContext>
      );
 }

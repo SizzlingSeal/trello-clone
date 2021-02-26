@@ -3,12 +3,13 @@ import TodoItem from './TodoItem';
 import AddTodoModal from './modals/AddTodoModal';
 import {ModalContext} from '../contexts/ModalContext';
 import {DataContext} from '../contexts/DataContext';
-import {Droppable} from 'react-beautiful-dnd';
+import {Droppable, Draggable} from 'react-beautiful-dnd';
 
 const TaskContainer = (props) => {
     const {modals,dispatch} = useContext(ModalContext);
     const {items, itemDispatch} = useContext(DataContext);
     const [id, setId] = useState('');
+    console.log(props.index)
 
     function handleModal(modal){
         return  () => dispatch({type: 'SHOW_MODAL', id:modal})
@@ -54,9 +55,13 @@ const TaskContainer = (props) => {
     }
 
     return ( 
-        <div className="task-container" onMouseDown={() => handlePressDown()}>
-            <div className="top">
-            <div className="dragicon"></div>
+        <Draggable key={props.columnname.id} draggableId={props.columnname.id} index={props.index} >
+            {provided => (
+        <div className="task-container" onMouseDown={() => handlePressDown()}
+        {...provided.draggableProps}
+        ref={provided.innerRef}>
+            <div className="top" {...provided.dragHandleProps}>
+            <div className="dragicon" ></div>
             <div>
             <p style={{display: "inline-block"}} >{props.columnname.name} </p>
             <i className='bx bx-edit bx-tada-hover' id="edit" ></i>
@@ -64,7 +69,7 @@ const TaskContainer = (props) => {
             <i className='bx bx-add-to-queue bx-tada-hover' id="add" onClick={() => {handleChange(); dispatch({type: 'SHOW_MODAL', id:'addtodomodal'});}}></i>
             <i className='bx bx-trash bx-tada-hover' id="remove" value={props.columnname.id} onClick={ handleRemoveTask}></i>
              </div>
-             <Droppable droppableId={props.columnname.id}>
+             <Droppable droppableId={props.columnname.id} type="task" direction="vertical">
                  {(provided, snapshot) => (
                      <div className="todo-container"
                      ref={provided.innerRef}
@@ -80,6 +85,8 @@ const TaskContainer = (props) => {
             </Droppable>
             <AddTodoModal isOpen={modals[3].display} onRequestClose={handleModal('addtodomodal')} passTodo={passTodo}/>
         </div>
+         )}
+        </Draggable>
      );
 }
  

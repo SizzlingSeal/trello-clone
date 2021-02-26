@@ -56,6 +56,9 @@ export const dataReducer = (state, action) => {
                 [action.newFinish.id]: action.newFinish,
             }}
 
+        case 'CHANGE_ORDER_TASK':
+            return {...state, columnOrder: action.newColumnOrder}
+
         case 'REMOVE_TODO':
             return{
                 ...state,
