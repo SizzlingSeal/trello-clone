@@ -32,6 +32,16 @@ i {
 i:hover {
   color: var(--icon-hover);
 }
+.swal-button {
+  background: var(--icon);
+}
+.swal-modal {
+  background: var(--headercolor);
+}
+.swal-title,
+.swal-text {
+  color: var(--font-color);
+}
 
 .done {
   text-decoration: line-through;

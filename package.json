@@ -13,10 +13,11 @@
     "react-dom": "^17.0.1",
     "react-modal": "^3.12.1",
     "react-scripts": "4.0.2",
+    "sweetalert": "^2.1.2",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.0"
   },
-  "homepage":"https://sizzlingseal.github.io/trello-clone",
+  "homepage": "https://sizzlingseal.github.io/trello-clone",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

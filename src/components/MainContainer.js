@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {DataContext} from '../contexts/DataContext';
 import TaskContainer from './TaskContainer';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import swal from 'sweetalert';
 
 const MainContainer = () => {
     const {items, itemDispatch} = useContext(DataContext);
@@ -9,7 +10,7 @@ const MainContainer = () => {
 
     function handleAddTask(name, project){
         if(name.length === 0 ){
-            alert("Enter Task Name!");
+            swal("Enter Task Name!", "Missing Input" , "error" );
         }else{
         setName('');
         itemDispatch({type:'ADD_TASK', name, project});

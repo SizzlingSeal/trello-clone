@@ -2,6 +2,7 @@
 import React, {useContext, useState} from 'react';
 import {DataContext} from '../contexts/DataContext';
 import {Draggable} from 'react-beautiful-dnd';
+import swal from 'sweetalert';
 
 
 const TodoItem = (props) => {
@@ -28,6 +29,10 @@ const TodoItem = (props) => {
           } :  style;
           
     }
+    function handleDesc(){
+        swal(props.task.name, props.task.desc, "info");
+    }
+
 
     return ( 
         <Draggable draggableId={props.task.id} index={props.index}>
@@ -40,14 +45,15 @@ const TodoItem = (props) => {
                 >
                 <i className='bx bx-grid-vertical' id="dragicon" title="Drag" {...provided.dragHandleProps}></i>
                 <div>
-                <h4  className={props.columnname.id}>{props.task.name}</h4>
+                <h4  className={props.columnname.id} onClick={() => handleDesc()}>{props.task.name}</h4>
                 </div>
                 <div>
-                <i className='bx bx-task bx-tada-hover' id="checktask" title="Complete Task"></i>
+
                 <i className='bx bx-task-x bx-tada-hover' id="deletetask" title="Remove Task" onClick={() => handleRemove(props.task.id)}></i>
                 </div>
                 </div>
             )}
+
         </Draggable>
      );
 }

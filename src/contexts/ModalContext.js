@@ -14,7 +14,7 @@ const ModalContextProvider = (props) =>{
             display:false
         },
         {
-            id:'settingsmodal',
+            id:'detailsmodal',
             display:false
         },
         {

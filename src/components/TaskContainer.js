@@ -4,6 +4,7 @@ import AddTodoModal from './modals/AddTodoModal';
 import {ModalContext} from '../contexts/ModalContext';
 import {DataContext} from '../contexts/DataContext';
 import {Droppable, Draggable} from 'react-beautiful-dnd';
+import swal from 'sweetalert';
 
 const TaskContainer = (props) => {
     const {modals,dispatch} = useContext(ModalContext);
@@ -33,32 +34,53 @@ const TaskContainer = (props) => {
     }
 
     function handleRemoveTask(){
-        var warning = window.confirm("You are going to delete a Task");
-        if(warning === true){
-            const colId = id;
-        const project = document.getElementById('projects').value.toString();
-        let  newColumn = Object.keys(items.columns)
-        .filter(key => key !== colId)
-        .reduce((result, current) => {
-        result[current] = items.columns[current];
-        return result;
-        }, {});
-        let newColumnOrder = items.columnOrder.filter(order => order !== colId);
-        let newTasks = items.projects[project].tasks.filter(task => task !== colId);
-        const itemCopy = items;
-        const {todoIds} =itemCopy.columns[id];
-          if(todoIds.length > 0){
-           todoIds.forEach(id => {
-               delete itemCopy.todos[id]
-           });
-         };
-         delete itemCopy.columns[id]
-        let newTodos = itemCopy.todos;
-        itemDispatch({type:'REMOVE_TASK', newColumn, newColumnOrder, project, newTasks, newTodos});
-        }
-        else{
-            return;
-        }
+        swal("Are you sure you want to delete this task?", "", "warning", {
+            buttons: {
+              
+              yes:{
+                  text:"Yes",
+                  value:'Yes'
+              },
+              cancel: "No",
+            },
+          } )
+          .then((value) => {
+            switch (value) {
+           
+              case 'Yes':
+                const colId = id;
+            const project = document.getElementById('projects').value.toString();
+            let  newColumn = Object.keys(items.columns)
+            .filter(key => key !== colId)
+            .reduce((result, current) => {
+            result[current] = items.columns[current];
+            return result;
+            }, {});
+            let newColumnOrder = items.columnOrder.filter(order => order !== colId);
+            let newTasks = items.projects[project].tasks.filter(task => task !== colId);
+            const itemCopy = items;
+            const {todoIds} =itemCopy.columns[id];
+            if(todoIds.length > 0){
+            todoIds.forEach(id => {
+                delete itemCopy.todos[id]
+            });
+            };
+            delete itemCopy.columns[id]
+            let newTodos = itemCopy.todos;
+            itemDispatch({type:'REMOVE_TASK', newColumn, newColumnOrder, project, newTasks, newTodos});
+                break;
+           
+              default:
+                  swal("Task not deleted");
+                break;
+           
+            }
+          });
+
+
+
+            
+   
     }
 
     function handlePressDown(){

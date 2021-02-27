@@ -2,9 +2,9 @@ import React, {useContext, useState} from 'react';
 import {Time} from '../contexts/Time';
 import AddProjectModal from './modals/AddProjectModal';
 import HelpModal from './modals/HelpModal';
-import SettingsModal from './modals/SettingsModal';
 import {ModalContext} from '../contexts/ModalContext';
 import {DataContext} from '../contexts/DataContext';
+import swal from 'sweetalert';
 
 const Header = () => {
     const {time} = useContext(Time);
@@ -30,37 +30,58 @@ const Header = () => {
     }
 
     function handleDeleteProject(){
-        var warning = window.confirm("You are going to delete a project");
-        if(warning === true){
-            const itemCopy = {...items};
-            const project =  document.getElementById("projects").value.toString();
-            const newProjectList = items.projectList.filter(e => e !== project);
-            const {tasks} =itemCopy.projects[project];
-            if(tasks.length > 0){//getting column in projects and deleting in columns
-             tasks.forEach(column => {
-                 const {todoIds} = itemCopy.columns[column];
-                 
-                 if(todoIds.length > 0 ){
-                     todoIds.forEach(id => {
-                         delete itemCopy.todos[id]//delete all todos
-                     });
-                 };
-                 delete itemCopy.columns[column]
-             });
-           };
-           delete itemCopy.projects[project];//final step delete the project
-           let newColumns = itemCopy.columns;
-           let newTodos = itemCopy.todos;
-           let newProjects = itemCopy.projects;
-           itemDispatch({type: 'REMOVE_PROJECT',  newProjectList, newColumns, newTodos, newProjects});
-           if(items.projectList.length >= 2  ){
-               handleChange(items.projectList[1]);
-           } else{
-               alert("No More Projects")
-           }
-        }else{
-            return;
-        }
+        swal("Are you sure you want to delete this project?", "", "warning", {
+            buttons: {
+              
+              yes:{
+                  text:"Yes",
+                  value:'Yes'
+              },
+              cancel: "No",
+            },
+          })
+          .then((value) => {
+            switch (value) {
+           
+              case 'Yes':
+                const itemCopy = {...items};
+                const project =  document.getElementById("projects").value.toString();
+                const newProjectList = items.projectList.filter(e => e !== project);
+                const {tasks} =itemCopy.projects[project];
+                if(tasks.length > 0){//getting column in projects and deleting in columns
+                 tasks.forEach(column => {
+                     const {todoIds} = itemCopy.columns[column];
+                     
+                     if(todoIds.length > 0 ){
+                         todoIds.forEach(id => {
+                             delete itemCopy.todos[id]//delete all todos
+                         });
+                     };
+                     delete itemCopy.columns[column]
+                 });
+               };
+               delete itemCopy.projects[project];//final step delete the project
+               let newColumns = itemCopy.columns;
+               let newTodos = itemCopy.todos;
+               let newProjects = itemCopy.projects;
+               itemDispatch({type: 'REMOVE_PROJECT',  newProjectList, newColumns, newTodos, newProjects});
+               if(items.projectList.length >= 2  ){
+                   handleChange(items.projectList[1]);
+               } else{
+                   swal("Warning", "No more projects left.", "warning")
+               }
+                break;
+           
+              default:
+                  swal("Project not deleted");
+                break;
+           
+            }
+          });
+
+
+        
+       
     }
     function toggleTheme(){
      if(document.getElementById('switch').checked === true){
@@ -92,8 +113,7 @@ const Header = () => {
             <a>{time}</a>
             </div>
             <AddProjectModal isOpen={modals[0].display} onRequestClose={handleModal('addmodal')} handleAdd={handleAdd}/>
-            <HelpModal isOpen={modals[1].display} onRequestClose={handleModal('helpmodal')}/>
-            <SettingsModal isOpen={modals[2].display} onRequestClose={handleModal('settingsmodal')}/>       
+            <HelpModal isOpen={modals[1].display} onRequestClose={handleModal('helpmodal')}/>     
         </header>
      );
 }
