@@ -25,7 +25,6 @@ const DataContextProvider = (props) =>{
             displayedProject: '',
             selectedTask: '',
         }
-
     });
 
     useEffect(() => {
@@ -38,5 +37,4 @@ const DataContextProvider = (props) =>{
         </DataContext.Provider>
     )
 }
-
 export default DataContextProvider;

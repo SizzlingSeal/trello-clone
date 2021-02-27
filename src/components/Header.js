@@ -12,16 +12,13 @@ const Header = () => {
     const {items, itemDispatch} = useContext(DataContext);
     const [selected, setSelected] = useState('');
     document.getElementById('base').setAttribute('data-theme', items.theme);
-    
-    
-
+   
     function handleModal(modal){
         return  () => dispatch({type: 'SHOW_MODAL', id:modal})
-        
     }
 
-    function handleAdd(event,name,desc){
-        itemDispatch({type:'ADD_PROJECT', name, desc});
+    function handleAdd(event,name){
+        itemDispatch({type:'ADD_PROJECT', name});
         dispatch({type: 'SHOW_MODAL', id:'addmodal'});
         handleChange(name);
         event.preventDefault();
@@ -31,6 +28,7 @@ const Header = () => {
         setSelected(selected);     
         itemDispatch({type:'CHANGE_PROJECT', selected});
     }
+
     function handleDeleteProject(){
         var warning = window.confirm("You are going to delete a project");
         if(warning === true){
@@ -63,21 +61,19 @@ const Header = () => {
         }else{
             return;
         }
-       
     }
     function toggleTheme(){
      if(document.getElementById('switch').checked === true){
         itemDispatch({type:'CHANGE_THEME', theme:'dark'});
      }else{
         itemDispatch({type:'CHANGE_THEME', theme:'light'});
-     }
-        
+     }  
     }
     
     return ( 
         <header>
             <div className="organizer">
-            <select name="projects" id="projects" onChange={(event) => handleChange(event.target.value)} value={selected}>
+            <select name="projects" id="projects" onChange={(event) => handleChange(event.target.value)} value={items.displayedProject}>
               {Object.keys(items.projects).length !== 0 ? 
               Object.keys(items.projects).map(i => {return <option key={i} value={i}>{i}</option>})
               : <option>Create new project</option> }
@@ -92,7 +88,7 @@ const Header = () => {
             <div className="information">
             <input type="checkbox" id="switch" onChange={toggleTheme} checked={items.theme === 'dark' ? true : false} /><label for="switch">Toggle</label>
             <i className='bx bxs-help-circle' id="help"
-            onClick={handleModal('helpmodal')} title="Help"></i>
+            onClick={handleModal('helpmodal')} title="About"></i>
             <a>{time}</a>
             </div>
             <AddProjectModal isOpen={modals[0].display} onRequestClose={handleModal('addmodal')} handleAdd={handleAdd}/>
@@ -101,5 +97,4 @@ const Header = () => {
         </header>
      );
 }
- 
 export default Header;

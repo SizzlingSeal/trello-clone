@@ -37,6 +37,11 @@ i:hover {
   color: var(--icon-hover);
 }
 
+.done {
+  text-decoration: line-through;
+  color: blue;
+}
+
 header {
   background: var(--headercolor);
   min-height: 8vh;
@@ -225,7 +230,7 @@ header .information #settings {
   height: -moz-fit-content;
   height: fit-content;
   position: absolute;
-  bottom: 20px;
+  bottom: 90px;
 }
 
 .main-container .addtask input {
@@ -254,8 +259,8 @@ header .information #settings {
 .addprojectmodal {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 10% 5% 10% 3%;
-      grid-template-rows: 10% 5% 10% 3%;
+  -ms-grid-rows: 10% 10% 5%;
+      grid-template-rows: 10% 10% 5%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -267,21 +272,14 @@ header .information #settings {
   bottom: 40px;
   margin: auto;
   background: var(--headercolor);
-  color: #e4e3d3;
+  color: var(--font-color);
   padding: 20px;
   outline: none;
   border: 5px solid var(--secondary-color);
 }
 
-.addprojectmodal textarea {
-  resize: none;
-  background: var(--container);
-  border: 2px solid var(--secondary-color);
-  outline: none;
-  maxlength: 20;
-}
-
 .addprojectmodal button {
+  font-size: 1.3rem;
   margin-top: 10px;
   background: var(--container);
   border: 2px solid var(--secondary-color);
@@ -296,6 +294,14 @@ header .information #settings {
   font-size: inherit;
 }
 
+.addprojectmodal button:hover {
+  background: var(--secondary-color);
+}
+
+.addprojectmodal label {
+  font-size: 1.3rem;
+}
+
 .addprojectmodal div {
   display: -ms-grid;
   display: grid;
@@ -306,6 +312,7 @@ header .information #settings {
 
 .addprojectmodal input {
   background: var(--container);
+  font-size: 1.3rem;
   border: 1px solid var(--secondary-color);
   outline: none;
 }
@@ -370,6 +377,30 @@ header .information #settings {
   color: white;
 }
 
+.addtaskmodal .helpmodal {
+  font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.addtaskmodal .helpmodal label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.addtaskmodal .helpmodal i {
+  font-size: 2rem;
+  padding: 0;
+}
+
 .task-container {
   display: inline-block;
   -webkit-box-orient: vertical;
@@ -389,6 +420,10 @@ header .information #settings {
   margin-right: 30px;
   -webkit-animation: slide-up 0.4s ease;
           animation: slide-up 0.4s ease;
+}
+
+.task-container i {
+  cursor: pointer;
 }
 
 .task-container .top {
@@ -459,6 +494,8 @@ header .information #settings {
 }
 
 .task-container .todo-container .todo-item #dragicon {
+  cursor: -webkit-grab;
+  cursor: grab;
   margin-left: 5px;
   text-align: center;
   width: 20px;

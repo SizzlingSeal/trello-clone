@@ -3,13 +3,14 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-
 const AddTodoModal = (props) => {
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
+    
     function handleNameChange(event){
         setName(event.target.value);
     }
+
     function handleDescChange(event){
         setDesc(event.target.value);
     }
@@ -30,11 +31,9 @@ const AddTodoModal = (props) => {
         <textarea required onChange={handleDescChange}>
         </textarea>
         </div>
-        
         <button>Add task</button>
         </form>
         </Modal>
      );
 }
- 
 export default AddTodoModal;

@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-
 const SettingsModal = (props) => {
     return ( 
         <Modal
@@ -11,9 +10,7 @@ const SettingsModal = (props) => {
         onRequestClose={props.onRequestClose}
         >
             <h1>SETTINGS</h1>
-
         </Modal>
      );
 }
- 
 export default SettingsModal;

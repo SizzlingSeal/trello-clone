@@ -1,10 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@1,700&display=swap");
 
-$base-color: #2274a5;
-$secondary-color: #00171f;
-$font-color: #e4e3d3;
-$ndbase-color: #007c77;
 html {
   --headercolor: #ffffff;
   --secondary-color: #e1e3e6;
@@ -35,6 +31,11 @@ i {
 }
 i:hover {
   color: var(--icon-hover);
+}
+
+.done {
+  text-decoration: line-through;
+  color: blue;
 }
 
 //header
@@ -174,7 +175,7 @@ header {
     width: fit-content;
     height: fit-content;
     position: absolute;
-    bottom: 20px;
+    bottom: 90px;
     input {
       font-size: 1.3rem;
       background: var(--headercolor);
@@ -190,7 +191,7 @@ header {
 //modals
 .addprojectmodal {
   display: grid;
-  grid-template-rows: 10% 5% 10% 3%;
+  grid-template-rows: 10% 10% 5%;
   height: fit-content;
   width: 40%;
   position: absolute;
@@ -200,18 +201,12 @@ header {
   bottom: 40px;
   margin: auto;
   background: var(--headercolor);
-  color: $font-color;
+  color: var(--font-color);
   padding: 20px;
   outline: none;
   border: 5px solid var(--secondary-color);
-  textarea {
-    resize: none;
-    background: var(--container);
-    border: 2px solid var(--secondary-color);
-    outline: none;
-    maxlength: 20;
-  }
   button {
+    font-size: 1.3rem;
     margin-top: 10px;
     background: var(--container);
     border: 2px solid var(--secondary-color);
@@ -224,6 +219,12 @@ header {
       font-size: inherit;
     }
   }
+  button:hover {
+    background: var(--secondary-color);
+  }
+  label {
+    font-size: 1.3rem;
+  }
   div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -231,6 +232,7 @@ header {
   }
   input {
     background: var(--container);
+    font-size: 1.3rem;
     border: 1px solid var(--secondary-color);
     outline: none;
   }
@@ -281,6 +283,19 @@ header {
     background: var(--icon-hover);
     color: white;
   }
+  .helpmodal {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    label {
+      display: flex;
+      align-items: center;
+    }
+    i {
+      font-size: 2rem;
+      padding: 0;
+    }
+  }
 }
 
 //task container
@@ -295,7 +310,9 @@ header {
   max-height: 500px;
   margin-right: 30px;
   animation: slide-up 0.4s ease;
-
+  i {
+    cursor: pointer;
+  }
   .top {
     display: flex;
     position: relative;
@@ -339,9 +356,9 @@ header {
       animation: slide-up 0.4s ease;
       background: var(--todo);
       #dragicon {
+        cursor: grab;
         margin-left: 5px;
         text-align: center;
-
         width: 20px;
         height: 20px;
       }

@@ -3,7 +3,6 @@ import {DataContext} from '../contexts/DataContext';
 import TaskContainer from './TaskContainer';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-
 const MainContainer = () => {
     const {items, itemDispatch} = useContext(DataContext);
     const [name, setName] = useState('');
@@ -16,12 +15,14 @@ const MainContainer = () => {
         itemDispatch({type:'ADD_TASK', name, project});
     }
     }
+    
     function handleChange(event){
         setName(event.target.value);
     }
 
     const onDragEnd = result => {
         const{destination, source, draggableId, type} = result;
+
         if(!destination){
             return;
         }
@@ -38,8 +39,10 @@ const MainContainer = () => {
             return;
             
         }
+
         const start = items.columns[source.droppableId];
         const finish = items.columns[destination.droppableId];
+
         if(start === finish){
             const newTaskIds = Array.from(start.todoIds);
             newTaskIds.splice(source.index, 1);
@@ -49,10 +52,8 @@ const MainContainer = () => {
                 ...start,
                 todoIds: newTaskIds,
             };
-
             itemDispatch({type:'CHANGE_ORDER_TODO_SAME', newColumn});
-            return;
-            
+            return;    
         }
 
         //moving from one list to another
@@ -85,9 +86,7 @@ const MainContainer = () => {
             droppableId="all-column"
             direction="horizontal" 
             type="column">
-                {provided => (
-
-                
+                {provided => (   
         <div className="main-container" 
         {...provided.droppableProps}
         ref={provided.innerRef}>
@@ -109,5 +108,4 @@ const MainContainer = () => {
         </DragDropContext>
      );
 }
- 
 export default MainContainer;

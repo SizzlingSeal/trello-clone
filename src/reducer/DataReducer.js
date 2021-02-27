@@ -6,7 +6,6 @@ export const dataReducer = (state, action) => {
            return {...state, projects:{...state.projects, [action.name]: {
             id:action.name,
             title:action.name,
-            desc:action.desc,
             tasks:[]
            }}, projectList:[...state.projectList, action.name],
             displayedProject: action.name}
@@ -58,6 +57,9 @@ export const dataReducer = (state, action) => {
         case 'CHANGE_ORDER_TASK':
             return {...state,  projects:{...state.projects, [state.displayedProject]: {...state.projects[state.displayedProject], tasks: action.newColumnOrder}},
              columnOrder: action.newColumnOrder}
+
+        case 'CHANGE_COLUMN_NAME':
+            return {...state, columns:{...state.columns, [action.colId]: {...state.columns[action.colId], name: action.rename} }}
 
         case 'REMOVE_TODO':
             return{

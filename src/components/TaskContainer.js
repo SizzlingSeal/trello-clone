@@ -9,19 +9,23 @@ const TaskContainer = (props) => {
     const {modals,dispatch} = useContext(ModalContext);
     const {items, itemDispatch} = useContext(DataContext);
     const [id, setId] = useState('');
+    
     console.log(props.index)
 
     function handleModal(modal){
         return  () => dispatch({type: 'SHOW_MODAL', id:modal})
     }
+
     function passTodo(event,name, desc){
         const columnId = items.selectedTask;
         handleAddTodo(event,name, desc, columnId);
     }
+
     function handleChange(){
         const ids = id;
         itemDispatch({type: 'CHANGE_SELECTED_TASK', ids})
     }
+
     function handleAddTodo(event,name,desc, columnname){
         itemDispatch({type: 'ADD_TODO', name, desc, columnname });
         dispatch({type: 'SHOW_MODAL', id:'addtodomodal'});
@@ -29,7 +33,9 @@ const TaskContainer = (props) => {
     }
 
     function handleRemoveTask(){
-        const colId = id;
+        var warning = window.confirm("You are going to delete a Task");
+        if(warning === true){
+            const colId = id;
         const project = document.getElementById('projects').value.toString();
         let  newColumn = Object.keys(items.columns)
         .filter(key => key !== colId)
@@ -49,9 +55,32 @@ const TaskContainer = (props) => {
          delete itemCopy.columns[id]
         let newTodos = itemCopy.todos;
         itemDispatch({type:'REMOVE_TASK', newColumn, newColumnOrder, project, newTasks, newTodos});
+        }
+        else{
+            return;
+        }
     }
+
     function handlePressDown(){
         setId(props.columnname.id);
+    }
+
+    function handleEdit(){
+        const colId = id;
+        var rename = prompt("Rename Task:", props.columnname.name);
+        if(rename === null){
+            return;
+        }else{
+            itemDispatch({type:'CHANGE_COLUMN_NAME', rename, colId});
+        } 
+    }
+    function getStyle(style, snapshot){
+        return  snapshot ?  {
+            ...style,
+            background: `#165cb8`,
+            transition: `background ease 0.5s`,
+            borderRadius: `5px`
+          } :  style;  
     }
 
     return ( 
@@ -60,11 +89,11 @@ const TaskContainer = (props) => {
         <div className="task-container" onMouseDown={() => handlePressDown()}
         {...provided.draggableProps}
         ref={provided.innerRef}>
-            <div className="top" {...provided.dragHandleProps}>
-            <div className="dragicon" ></div>
+            <div className="top">
+            <div className="dragicon" {...provided.dragHandleProps}></div>
             <div>
             <p style={{display: "inline-block"}} >{props.columnname.name} </p>
-            <i className='bx bx-edit bx-tada-hover' id="edit" ></i>
+            <i className='bx bx-edit bx-tada-hover' id="edit" onClick={() => handleEdit()}></i>
             </div>
             <i className='bx bx-add-to-queue bx-tada-hover' id="add" onClick={() => {handleChange(); dispatch({type: 'SHOW_MODAL', id:'addtodomodal'});}}></i>
             <i className='bx bx-trash bx-tada-hover' id="remove" value={props.columnname.id} onClick={ handleRemoveTask}></i>
@@ -75,7 +104,7 @@ const TaskContainer = (props) => {
                      ref={provided.innerRef}
                      {...provided.droppableProps}
                      isDraggingOver={snapshot.isDraggingOver}
-                     >
+                     style={getStyle(provided.droppableProps.style, snapshot.isDraggingOver)}>
                     {props.task.map((task,index) => (
                         <TodoItem key={task.id} task={task} index={index} columnname={props.columnname}/>
                     ))}
@@ -89,5 +118,4 @@ const TaskContainer = (props) => {
         </Draggable>
      );
 }
- 
 export default TaskContainer;
