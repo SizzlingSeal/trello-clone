@@ -325,6 +325,7 @@ header {
   }
   .top {
     display: flex;
+    user-select: none;
     position: relative;
     align-items: center;
     justify-content: space-around;
@@ -354,6 +355,8 @@ header {
     margin-top: 5px;
 
     .todo-item {
+      cursor: pointer;
+      user-select: none;
       display: grid;
       grid-template-columns: 10% 70% 20%;
       justify-content: space-around;
