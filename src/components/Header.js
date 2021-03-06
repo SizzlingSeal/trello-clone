@@ -66,7 +66,7 @@ const Header = () => {
                let newProjects = itemCopy.projects;
                itemDispatch({type: 'REMOVE_PROJECT',  newProjectList, newColumns, newTodos, newProjects});
                if(items.projectList.length >= 2  ){
-                   handleChange(items.projectList[1]);
+                   handleChange(document.getElementById('projects').value);
                } else{
                    swal("Warning", "No more projects left.", "warning")
                }
